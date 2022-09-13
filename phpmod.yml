@@ -1,0 +1,10 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: Add PHP Support For Apache2
+    apt:
+      name: libapache2-mod-php
+      state: latest
