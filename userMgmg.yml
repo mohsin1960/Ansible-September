@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+  
+  - name: Create New User (Mohsin)
+    tags: always
+    user:
+      name: mohsin
+      groups: root
+
+  - name: add ssh key for Mohsin
+    tags: always
+    authorized_key:
+      user: mohsin
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfINfFGqzHFU803ynumF5rmCSPYhOigwnCgCpSYf/Ax FINAL" 
+
+  - name: add sudoers file for Mohsin
+    tags: always
+    copy:
+      src: sudoers_mohsin
+      dest: /etc/sudoers.d/mohsin
+      owner: root
+      group: root
+      mode: 0440

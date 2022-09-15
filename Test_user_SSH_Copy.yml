@@ -1,0 +1,26 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+ 
+  - name: Create User Test
+    tags: always
+    user:
+      name: test
+      groups: root
+
+  - name: SSH add
+    tags: always
+    authorized_key:
+      user: test
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMfINfFGqzHFU803ynumF5rmCSPYhOigwnCgCpSYf/Ax FINAL"
+
+  - name: add Sudoers 
+    tags: always
+    copy: 
+      src: sudoers_test
+      dest: /etc/sudoers.d/test
+      owner: root
+      group: root
+      mode: 0440
